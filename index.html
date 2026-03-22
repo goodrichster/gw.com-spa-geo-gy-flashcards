@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Geometry Flashcards</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="app">
+    <header class="header">
+      <h1 class="title">Geometry Flashcards</h1>
+      <p class="subtitle">High school geometry — special triangles, Pythagorean Theorem, Laws of Sines/Cosines, SOH-CAH-TOA, reciprocal trig</p>
+    </header>
+
+    <section class="toolbar" aria-label="Study controls">
+      <div class="toolbar-row">
+        <label class="field">
+          <span class="field-label">Topic</span>
+          <select id="topic-filter" class="select">
+            <option value="all">All topics</option>
+          </select>
+        </label>
+        <label class="field checkbox-field">
+          <input type="checkbox" id="shuffle-toggle" />
+          <span>Shuffle order</span>
+        </label>
+        <label class="field checkbox-field">
+          <input type="checkbox" id="review-missed-toggle" />
+          <span>Review missed only</span>
+        </label>
+      </div>
+      <div class="toolbar-row mode-row">
+        <span class="field-label">View</span>
+        <div class="segmented" role="group" aria-label="View mode">
+          <button type="button" class="segment active" id="mode-study" data-mode="study">One card</button>
+          <button type="button" class="segment" id="mode-browse" data-mode="browse">Browse all</button>
+        </div>
+      </div>
+    </section>
+
+    <main class="main">
+      <section id="study-panel" class="study-panel" aria-live="polite">
+        <div class="score-panel" id="score-panel" aria-label="Session score">
+          <div class="score-grid">
+            <span class="score-item"><span class="score-label">Correct</span> <strong id="score-correct">0</strong></span>
+            <span class="score-item"><span class="score-label">Incorrect</span> <strong id="score-incorrect">0</strong></span>
+            <span class="score-item"><span class="score-label">Total</span> <strong id="score-total">0</strong></span>
+            <span class="score-item"><span class="score-label">Accuracy</span> <strong id="score-accuracy">—</strong></span>
+            <span class="score-item"><span class="score-label">Streak</span> <strong id="score-streak">0</strong></span>
+            <span class="score-item"><span class="score-label">Best</span> <strong id="score-best">0</strong></span>
+          </div>
+          <div class="score-panel__meta" id="score-by-topic" aria-label="Per-topic counts this session" hidden></div>
+          <button type="button" class="btn-reset" id="btn-reset-score">Reset progress</button>
+        </div>
+        <div class="deck-progress-wrap" aria-hidden="true">
+          <div class="deck-progress-bar" id="deck-progress-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"></div>
+        </div>
+        <div class="progress" id="progress" aria-hidden="true">—</div>
+        <button type="button" class="card-flip" id="flip-card" aria-label="Flip card. Tap again to show front.">
+          <span class="card-inner" id="card-inner">
+            <span class="card-face card-front">
+              <span class="card-meta">
+                <span class="topic-pill" id="card-topic"></span>
+                <span class="type-pill" id="card-type"></span>
+              </span>
+              <span class="card-text" id="card-front-text"></span>
+              <span class="card-hint">Tap or click to reveal</span>
+            </span>
+            <span class="card-face card-back">
+              <span class="card-meta">
+                <span class="topic-pill" id="card-topic-back"></span>
+                <span class="answer-label">Answer</span>
+              </span>
+              <span class="card-text" id="card-back-text"></span>
+            </span>
+          </span>
+        </button>
+        <div class="rating-row" id="rating-row" hidden>
+          <span class="rating-hint" id="rating-hint">How did you do?</span>
+          <div class="rating-actions">
+            <button type="button" class="btn-score btn-score--ok" id="btn-got-it">✓ Got it</button>
+            <button type="button" class="btn-score btn-score--review" id="btn-review">↺ Review</button>
+          </div>
+        </div>
+        <nav class="nav-buttons" aria-label="Card navigation">
+          <button type="button" class="btn secondary" id="btn-prev" disabled>Previous</button>
+          <button type="button" class="btn" id="btn-next">Next</button>
+        </nav>
+      </section>
+
+      <section id="browse-panel" class="browse-panel hidden" aria-label="All cards">
+        <p class="browse-count" id="browse-count"></p>
+        <ul class="card-list" id="card-list"></ul>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <p>Open <code>index.html</code> in a browser. No server required.</p>
+    </footer>
+  </div>
+
+  <script src="cards.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
