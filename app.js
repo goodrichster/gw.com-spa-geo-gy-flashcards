@@ -479,3 +479,19 @@
 
   init();
 })();
+
+function sendHeight() {
+  const height = document.body.scrollHeight;
+  window.parent.postMessage({ type: "gw-height", height }, "*");
+}
+
+sendHeight();
+
+// Send on load
+window.addEventListener("load", sendHeight);
+
+// Send on resize
+window.addEventListener("resize", sendHeight);
+
+// Optional: send periodically (handles dynamic changes)
+setInterval(sendHeight, 500);
