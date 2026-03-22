@@ -309,7 +309,7 @@ body {
   flex-direction: column;
   min-height: 12rem;
   max-height: min(70vh, 32rem);
-  overflow: hidden;
+  /* Do not use overflow: hidden here — it flattens 3D and mirrors the back face. */
   transform-style: preserve-3d;
   transition: transform 0.35s ease;
   border-radius: var(--radius);
@@ -341,12 +341,13 @@ body {
 
 .card-front {
   position: relative;
+  transform: translateZ(1px);
 }
 
 .card-back {
   position: absolute;
   inset: 0;
-  transform: rotateY(180deg);
+  transform: rotateY(180deg) translateZ(1px);
   background: linear-gradient(180deg, #fafbfd 0%, var(--surface) 100%);
 }
 
