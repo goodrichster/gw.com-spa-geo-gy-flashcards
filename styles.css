@@ -305,8 +305,11 @@ body {
 
 .card-inner {
   position: relative;
-  display: block;
+  display: flex;
+  flex-direction: column;
   min-height: 12rem;
+  max-height: min(70vh, 32rem);
+  overflow: hidden;
   transform-style: preserve-3d;
   transition: transform 0.35s ease;
   border-radius: var(--radius);
@@ -324,9 +327,11 @@ body {
 .card-face {
   display: flex;
   flex-direction: column;
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow: hidden;
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
-  min-height: 12rem;
   padding: 1.1rem 1.2rem;
   background: var(--surface);
   border: 1px solid var(--border);
@@ -351,6 +356,7 @@ body {
   align-items: center;
   gap: 0.4rem 0.6rem;
   margin-bottom: 0.75rem;
+  flex-shrink: 0;
 }
 
 .topic-pill {
@@ -380,10 +386,16 @@ body {
 }
 
 .card-text {
-  flex: 1;
+  flex: 1 1 auto;
+  min-height: 0;
   font-size: 1.05rem;
   white-space: pre-wrap;
   word-break: break-word;
+  overflow-wrap: anywhere;
+  overflow-y: auto;
+  overflow-x: hidden;
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
 }
 
 .card-text .math {
@@ -395,6 +407,7 @@ body {
   margin-top: 1rem;
   font-size: 0.8rem;
   color: var(--muted);
+  flex-shrink: 0;
 }
 
 .rating-row {
@@ -611,10 +624,6 @@ body {
 
   .segment {
     flex: 1;
-  }
-
-  .card-face {
-    min-height: 12rem;
   }
 }
 
