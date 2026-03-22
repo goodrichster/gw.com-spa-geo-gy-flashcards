@@ -30,29 +30,33 @@
           <span>Review missed only</span>
         </label>
       </div>
-      <div class="toolbar-row mode-row">
-        <span class="field-label">View</span>
-        <div class="segmented" role="group" aria-label="View mode">
-          <button type="button" class="segment active" id="mode-study" data-mode="study">One card</button>
-          <button type="button" class="segment" id="mode-browse" data-mode="browse">Browse all</button>
+      <div class="toolbar-row toolbar-row--view-score">
+        <div class="toolbar-view">
+          <span class="field-label">View</span>
+          <div class="segmented" role="group" aria-label="View mode">
+            <button type="button" class="segment active" id="mode-study" data-mode="study">One card</button>
+            <button type="button" class="segment" id="mode-browse" data-mode="browse">Browse all</button>
+          </div>
         </div>
+        <div class="toolbar-session" id="score-panel" aria-label="Session score">
+          <span class="field-label">Session</span>
+          <div class="score-inline">
+            <strong id="score-correct">0</strong> correct
+            <span class="score-inline__sep" aria-hidden="true">·</span>
+            <strong id="score-incorrect">0</strong> incorrect
+            <span class="score-inline__sep" aria-hidden="true">·</span>
+            <strong id="score-total">0</strong> total
+          </div>
+          <button type="button" class="btn-reset" id="btn-reset-score">Reset</button>
+        </div>
+      </div>
+      <div class="toolbar-row toolbar-row--meta" id="score-by-topic-row" hidden>
+        <p class="score-panel__meta" id="score-by-topic" aria-label="Per-topic counts this session"></p>
       </div>
     </section>
 
     <main class="main">
       <section id="study-panel" class="study-panel" aria-live="polite">
-        <div class="score-panel" id="score-panel" aria-label="Session score">
-          <div class="score-grid">
-            <span class="score-item"><span class="score-label">Correct</span> <strong id="score-correct">0</strong></span>
-            <span class="score-item"><span class="score-label">Incorrect</span> <strong id="score-incorrect">0</strong></span>
-            <span class="score-item"><span class="score-label">Total</span> <strong id="score-total">0</strong></span>
-            <span class="score-item"><span class="score-label">Accuracy</span> <strong id="score-accuracy">—</strong></span>
-            <span class="score-item"><span class="score-label">Streak</span> <strong id="score-streak">0</strong></span>
-            <span class="score-item"><span class="score-label">Best</span> <strong id="score-best">0</strong></span>
-          </div>
-          <div class="score-panel__meta" id="score-by-topic" aria-label="Per-topic counts this session" hidden></div>
-          <button type="button" class="btn-reset" id="btn-reset-score">Reset progress</button>
-        </div>
         <div class="deck-progress-wrap" aria-hidden="true">
           <div class="deck-progress-bar" id="deck-progress-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"></div>
         </div>

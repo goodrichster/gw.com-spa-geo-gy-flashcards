@@ -56,10 +56,8 @@
   var scoreCorrect = document.getElementById("score-correct");
   var scoreIncorrect = document.getElementById("score-incorrect");
   var scoreTotal = document.getElementById("score-total");
-  var scoreAccuracy = document.getElementById("score-accuracy");
-  var scoreStreak = document.getElementById("score-streak");
-  var scoreBest = document.getElementById("score-best");
   var scoreByTopic = document.getElementById("score-by-topic");
+  var scoreByTopicRow = document.getElementById("score-by-topic-row");
   var btnResetScore = document.getElementById("btn-reset-score");
   var deckProgressBar = document.getElementById("deck-progress-bar");
   var ratingRow = document.getElementById("rating-row");
@@ -115,22 +113,14 @@
     scoreCorrect.textContent = String(scoreState.correct);
     scoreIncorrect.textContent = String(scoreState.incorrect);
     scoreTotal.textContent = String(scoreState.total);
-    if (scoreState.total === 0) {
-      scoreAccuracy.textContent = "—";
-    } else {
-      var pct = Math.round((scoreState.correct / scoreState.total) * 1000) / 10;
-      scoreAccuracy.textContent = pct + "%";
-    }
-    scoreStreak.textContent = String(scoreState.currentStreak);
-    scoreBest.textContent = String(scoreState.bestStreak);
     updateTopicMeta();
   }
 
   function updateTopicMeta() {
     if (!scoreByTopic) return;
     if (!scoreState.total) {
-      scoreByTopic.hidden = true;
       scoreByTopic.textContent = "";
+      if (scoreByTopicRow) scoreByTopicRow.hidden = true;
       return;
     }
     var parts = [];
@@ -143,9 +133,10 @@
     });
     if (parts.length) {
       scoreByTopic.textContent = "This session: " + parts.join(" · ");
-      scoreByTopic.hidden = false;
+      if (scoreByTopicRow) scoreByTopicRow.hidden = false;
     } else {
-      scoreByTopic.hidden = true;
+      scoreByTopic.textContent = "";
+      if (scoreByTopicRow) scoreByTopicRow.hidden = true;
     }
   }
 
