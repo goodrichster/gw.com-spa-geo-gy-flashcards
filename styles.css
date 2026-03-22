@@ -305,14 +305,16 @@ body {
 
 .card-inner {
   position: relative;
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-rows: auto;
   min-height: 12rem;
-  max-height: min(70vh, 32rem);
+  min-width: 0;
   /* Do not use overflow: hidden here — it flattens 3D and mirrors the back face. */
   transform-style: preserve-3d;
   transition: transform 0.35s ease;
   border-radius: var(--radius);
+  /* Both faces share one grid cell; row height = max(front, back) so the box grows with content. */
 }
 
 .card-flip.is-flipped .card-inner {
@@ -325,10 +327,10 @@ body {
 }
 
 .card-face {
+  grid-area: 1 / 1;
   display: flex;
   flex-direction: column;
-  flex: 1 1 auto;
-  min-height: 0;
+  width: 100%;
   overflow: hidden;
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
@@ -345,8 +347,7 @@ body {
 }
 
 .card-back {
-  position: absolute;
-  inset: 0;
+  position: relative;
   transform: rotateY(180deg) translateZ(1px);
   background: linear-gradient(180deg, #fafbfd 0%, var(--surface) 100%);
 }
@@ -387,16 +388,11 @@ body {
 }
 
 .card-text {
-  flex: 1 1 auto;
-  min-height: 0;
   font-size: 1.05rem;
   white-space: pre-wrap;
   word-break: break-word;
   overflow-wrap: anywhere;
-  overflow-y: auto;
   overflow-x: hidden;
-  overscroll-behavior: contain;
-  -webkit-overflow-scrolling: touch;
 }
 
 .card-text .math {
@@ -405,7 +401,8 @@ body {
 }
 
 .card-hint {
-  margin-top: 1rem;
+  margin-top: auto;
+  padding-top: 1rem;
   font-size: 0.8rem;
   color: var(--muted);
   flex-shrink: 0;
