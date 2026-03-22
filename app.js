@@ -63,9 +63,31 @@
   var ratingRow = document.getElementById("rating-row");
   var btnGotIt = document.getElementById("btn-got-it");
   var btnReview = document.getElementById("btn-review");
+  var headerToast = document.getElementById("header-toast");
+  var headerToastHideTimer = null;
+  var headerToastFadeTimer = null;
 
   var filteredOrder = [];
   var index = 0;
+
+  function showHeaderToast(message) {
+    var el = headerToast;
+    if (!el) return;
+    if (headerToastHideTimer) window.clearTimeout(headerToastHideTimer);
+    if (headerToastFadeTimer) window.clearTimeout(headerToastFadeTimer);
+    el.textContent = message;
+    el.removeAttribute("hidden");
+    el.classList.remove("header-toast--show");
+    void el.offsetWidth;
+    el.classList.add("header-toast--show");
+    headerToastHideTimer = window.setTimeout(function () {
+      el.classList.remove("header-toast--show");
+      headerToastFadeTimer = window.setTimeout(function () {
+        el.setAttribute("hidden", "");
+        el.textContent = "";
+      }, 350);
+    }, 5000);
+  }
 
   function ensureTopic(topic) {
     if (!scoreState.byTopic[topic]) {
@@ -289,13 +311,6 @@
   }
 
   function resetScore() {
-    if (
-      !window.confirm(
-        "Reset all score data? This clears correct/incorrect counts, streaks, missed queue, and per-topic stats for this browser."
-      )
-    ) {
-      return;
-    }
     scoreState = defaultScoreState();
     try {
       localStorage.removeItem(STORAGE_KEY);
@@ -305,6 +320,7 @@
     ratingBusy = false;
     updateScoreUI();
     rebuildOrder();
+    showHeaderToast("Answer tracking reset.");
   }
 
   function renderStudy() {
