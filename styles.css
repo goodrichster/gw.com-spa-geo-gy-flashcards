@@ -54,12 +54,6 @@ body {
   letter-spacing: -0.02em;
 }
 
-.subtitle {
-  margin: 0.35rem 0 0;
-  font-size: 0.95rem;
-  color: var(--muted);
-}
-
 .toolbar {
   background: var(--surface);
   border: 1px solid var(--border);
