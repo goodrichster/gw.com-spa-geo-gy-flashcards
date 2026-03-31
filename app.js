@@ -49,6 +49,7 @@
   var cardType = document.getElementById("card-type");
   var cardFrontText = document.getElementById("card-front-text");
   var cardBackText = document.getElementById("card-back-text");
+  var cardBackDiagram = document.getElementById("card-back-diagram");
   var btnPrev = document.getElementById("btn-prev");
   var btnNext = document.getElementById("btn-next");
   var cardList = document.getElementById("card-list");
@@ -69,6 +70,23 @@
 
   var filteredOrder = [];
   var index = 0;
+
+  function getDiagramSvg(card) {
+    if (!card || !card.id) return "";
+    var map = window.GEOMETRY_DIAGRAMS || {};
+    return map[card.id] || "";
+  }
+
+  function setCardDiagram(el, svg) {
+    if (!el) return;
+    if (svg) {
+      el.innerHTML = svg;
+      el.hidden = false;
+    } else {
+      el.innerHTML = "";
+      el.hidden = true;
+    }
+  }
 
   function showHeaderToast(message) {
     var el = headerToast;
@@ -333,6 +351,7 @@
         ? "Nothing to review yet, or try another topic."
         : "Choose another topic or add cards in cards.js.";
       cardBackText.textContent = "";
+      setCardDiagram(cardBackDiagram, "");
       cardTopic.textContent = "";
       cardTopicBack.textContent = "";
       cardType.textContent = "";
@@ -353,6 +372,7 @@
     cardType.textContent = TYPE_LABELS[card.type] || card.type;
     cardFrontText.textContent = card.front;
     cardBackText.textContent = card.back;
+    setCardDiagram(cardBackDiagram, getDiagramSvg(card));
 
     progressEl.textContent = "Card " + (index + 1) + " of " + n;
     btnPrev.disabled = index === 0;
@@ -391,6 +411,14 @@
       backP.textContent = card.back;
       details.appendChild(summary);
       details.appendChild(backP);
+      var svg = getDiagramSvg(card);
+      if (svg) {
+        var fig = document.createElement("div");
+        fig.className = "card-list-diagram";
+        fig.setAttribute("aria-hidden", "true");
+        fig.innerHTML = svg;
+        details.appendChild(fig);
+      }
       li.appendChild(details);
       cardList.appendChild(li);
     });

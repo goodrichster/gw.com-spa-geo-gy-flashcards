@@ -400,6 +400,22 @@ body {
   font-size: 0.98em;
 }
 
+.card-diagram {
+  margin-top: 0.95rem;
+  padding-top: 0.85rem;
+  border-top: 1px solid var(--border);
+  flex-shrink: 0;
+  width: 100%;
+}
+
+.card-diagram svg {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  overflow: visible;
+}
+
 .card-hint {
   margin-top: auto;
   padding-top: 1rem;
@@ -568,6 +584,19 @@ body {
   font-size: 0.92rem;
   color: var(--text);
   white-space: pre-wrap;
+}
+
+.card-list-diagram {
+  margin-top: 0.65rem;
+  padding-top: 0.65rem;
+  border-top: 1px solid var(--border);
+}
+
+.card-list-diagram svg {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  height: auto;
 }
 
 .footer {

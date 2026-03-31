@@ -2,6 +2,7 @@
  * Geometry flashcard deck — edit this file to add or change cards.
  * Each card: topic id, type (rule | problem), front, back.
  * Plain text; use \n for line breaks in strings.
+ * Rule-card diagrams: optional SVG strings keyed by id in diagrams.js (GEOMETRY_DIAGRAMS).
  */
 (function () {
   window.GEOMETRY_CARDS = [

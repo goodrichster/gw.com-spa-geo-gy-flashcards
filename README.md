@@ -25,6 +25,7 @@ No `npm install`, no server required. Scripts load as plain files, so this works
 | `styles.css` | Layout, card flip, responsive styles |
 | `app.js`     | Topic filter, shuffle, one-card vs browse, navigation |
 | `cards.js`   | Flashcard data (`window.GEOMETRY_CARDS`) |
+| `diagrams.js` | SVG figures for rule cards (`window.GEOMETRY_DIAGRAMS`, keyed by card `id`) |
 | `README.md`  | This file |
 
 ## Flashcard data
@@ -38,6 +39,10 @@ Cards live in `cards.js` as `window.GEOMETRY_CARDS`, an array of objects:
 - `back` — answer, definition, or explanation.
 
 Human-readable topic titles are defined in `app.js` in `TOPIC_LABELS`. Add a new topic there if you introduce a new `topic` value.
+
+## Diagrams
+
+Rule cards that need a labeled figure use inline SVG in `diagrams.js`. Keys are card `id` strings; the app shows the SVG on the back of the card in study mode and in browse mode. To add or change a diagram, edit the matching entry in `window.GEOMETRY_DIAGRAMS`.
 
 ## Features
 
